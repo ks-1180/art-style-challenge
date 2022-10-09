@@ -1,8 +1,5 @@
 <p align="center">
-  <a href="https://example.com/">
-    <img src="https://via.placeholder.com/72" alt="Logo" width=72 height=72>
-  </a>
-
+  <img src="images/art_styles_exampel.png" alt="Logo" width=80% height=80%>
   <h3 align="center">Art Style Challenge</h3>
 
   <p align="center">
