@@ -28,7 +28,7 @@ The goal was to redraw the same character in as many art styles as possible, inc
 The options are almost limitless.
 The header of this README shows my own take on the Art Style Challenge from 4 years ago.
 
-However, instead of drawing them by hand, which requires multiple hours and lots of skill, we utilize StyleGANs.
+However, instead of drawing them by hand, which requires multiple hours and drawing skills, we utilize StyleGANs.
 Gathering our own data we either train our model using transfer learning or train a new conditional GAN from scratch. 
 We further apply style transfer by mixing the weights of StyleGANs within different domains [[2]](#2).
 Our goal is to generate deceptively real-looking characters in a minimum of about 5 different styles. 
@@ -49,7 +49,7 @@ Each layer responds to different features.
 While the lower levels address the shape and geometry of the face, higher resolution layers are responsible for the texture, color, and lighting. 
 Based on StyleGAN2 the method starts with a pre-trained model and uses transfer learning for the new dataset. 
 Instead of linearly interpolating between all the parameters, an arbitrary function is used to mix the weights from both the original and new generators.
-The examples chose a binary decision between either turning a new layer on or off, called ``layer swapping''. 
+The examples chose a binary decision between either turning a new layer on or off, called "layer swapping". 
 Swapping the layer can for instance enable the preservation of the face shape and only apply texture and color of the new style, enabling more control over the outcome.
 - **Less data:**
 Training a generative adversarial network often requires a vast amount of data.
