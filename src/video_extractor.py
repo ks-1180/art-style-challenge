@@ -1,6 +1,6 @@
 import numpy as np
 import cv2
-from anime-face-detector import create_detector
+from anime_face_detector import create_detector
 
 import os
 
