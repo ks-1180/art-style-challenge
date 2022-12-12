@@ -89,15 +89,36 @@ For now, we gathered the following datasets:
 |  Fire Emblem |        398       |     183   | 215 |
 |     Digital Art    |        346       |     100    | 246 |
 
-The **Studio Ghilbli** dataset was gather using the following steps: <br>
-Step 1: collect video data from all the movies <br>
-Step 2: Extract the faces using video_extractor.py (which uses the anime-face-detector \ref to find the faces) <br>
+The following list highlights the main steps carried out for the data collection process. 
+
+1. **Studio Ghilbli**: <br>
+Step 1: collect video data from all the movies (use own movie collection) <br>
+Step 2: Extract the faces using `video_extractor.py` (which uses the <a href="https://pypi.org/project/anime-face-detector/">anime-face-detector</a> [[6]](#6) to find the faces) <br>
 Step 3: Manually clean up the dataset (remove non-humans and side profiles) <br>
 Step 4: divide the data into male and female characters <br>
+
+2. **Fire Emblem**: <br>
+Step 1: Collect original character Sprites from *Fire Emblem Three Houses* and *Fire Emblem Fates* games <br>
+Step 2: Use Photoshop Batch Processing, since all sprites are based on the same layout <br>
+
+3. **Digital Art**: <br>
+Step 1: Collect digital art painting from sakimichan <br>
+Step 2: Gather additional data by either handpicking or scrapping pinters images <br>
+Step 3: Crop and extract faces <br>
 
 ### Training
 We train multiple models utilizing transfer learning and evaluate their progress using the Frichet Inception Distance (FID) during the training process.
 Additionally, we train a conditional StyleGAN including all selected art styles. 
+
+We trained the following models:
+|      Targer Data   |  Base Model | Training Time |   FID Estimation  |   FID  |
+|:------------------:|:-----------:|:-------------:|:-----------------:|:------:|
+| Studio Ghibli male |   ffhq-256  | 23h 02m 32s   | 30 | - |
+|Studio Ghibli female|   ffhq-256  | 22h 39m 30s   | 30 | 19.52 |
+|    Fire Emblem male|   ffhq-256  | 23h 50m 31s   | 50 | 51.93 |
+| Fire Emblem female |   ffhq-256  | 21h 24m 19s   | 50 | 50.18 |
+|   Digital Art male |   ffhq-256  | 11h 40m 20s   | 50 | 85.78 |
+| Digital Art female |   ffhq-256  | 11h 59m 11s   | 50 | 45.39 |
 
 ### Build Application
 We build a small web application. 
@@ -113,17 +134,6 @@ Depending on the remaining time, it will either show all the trained styles on r
 | Final Implementation |    18h       |     –     | 18.01.2023 |
 |      Report      |        10h       |     –     | 18.01.2023 |
 | Final Presentation |      4h        |     –     | 26.01.2023 |
-
-
-## Results
-|      Targer Data   |  Base Model | Training Time |   FID Estimation  |   FID  |
-|:------------------:|:-----------:|:-------------:|:-----------------:|:------:|
-| Studio Ghibli male |   ffhq-256  | 23h 02m 32s   | 30 | - |
-|Studio Ghibli female|   ffhq-256  | 22h 39m 30s   | 30 | 19.52 |
-|    Fire Emblem male|   ffhq-256  | 23h 50m 31s   | 50 | 51.93 |
-| Fire Emblem female |   ffhq-256  | 21h 24m 19s   | 50 | 50.18 |
-|   Digital Art male |   ffhq-256  | 11h 40m 20s   | 50 | 85.78 |
-| Digital Art female |   ffhq-256  | 11h 59m 11s   | 50 | 45.39 |
 
 ## References
 
@@ -151,3 +161,6 @@ pages 170–186. Springer*, 2020.
 Tero Karras, Miika Aittala, Janne Hellsten, Samuli Laine, Jaakko Lehtinen, and Timo Aila.
 Training generative adversarial networks with limited data. Advances in Neural Information
 Processing Systems, 33:12104–12114, 2020.
+
+<a id="6">[6]</a> 
+hysts. Anime face detector. https://github.com/hysts/anime-face-detector, 2021.
