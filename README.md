@@ -102,6 +102,26 @@ Depending on the remaining time, it will either show all the trained styles on r
 |      Report      |        10h       |     –     | 18.01.2023 |
 | Final Presentation |      4h        |     –     | 26.01.2023 |
 
+## Datasets
+|      Art Style   |  #all | #male |  #female  |
+|:----------------:|:----------------:|:---------:|:----------:|
+|   Studio Ghibli  |        4,207        |     1,549    | 2,658 |
+|  Fire Emblem |        398       |     183   | 215 |
+|     Digital Art    |        346       |     100    | 246 |
+
+
+###Ghibli
+
+## Results
+|      Targer Data   |  Base Model | Training Time |   FID Estimation  |   FID  |
+|:------------------:|:-----------:|:-------------:|:-----------------:|:------:|
+| Studio Ghibli male |   ffhq-256  | 23h 02m 32s   | 30 | - |
+|Studio Ghibli female|   ffhq-256  | 22h 39m 30s   | 30 | 19.52 |
+|    Fire Emblem male|   ffhq-256  | 23h 50m 31s   | 50 | 51.93 |
+| Fire Emblem female |   ffhq-256  | 21h 24m 19s   | 50 | 50.18 |
+|   Digital Art male |   ffhq-256  | 11h 40m 20s   | 50 | 85.78 |
+| Digital Art female |   ffhq-256  | 11h 59m 11s   | 50 | 45.39 |
+
 ## References
 
 <a id="1">[1]</a> 
