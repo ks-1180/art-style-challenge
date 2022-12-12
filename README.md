@@ -93,14 +93,14 @@ Depending on the remaining time, it will either show all the trained styles on r
 
 ## Timeline
 
-|      Milestone   |  Time Estimation |  Deadline  |
-|:----------------:|:----------------:|-----------:|
-|   Project Set-Up |        4h        | 14.12.2022 |
-|  Data Collection |        10h       | 14.12.2022 |
-|     Prototype    |        12h       | 14.12.2022 |
-| Final Implementation |    18h       | 18.01.2023 |
-|      Report      |        10h       | 18.01.2023 |
-| Final Presentation |      4h        | 26.01.2023 |
+|      Milestone   |  Time Estimation | Real Time |  Deadline  |
+|:----------------:|:----------------:|:---------:|:----------:|
+|   Project Set-Up |        4h        |     8h    | 14.12.2022 |
+|  Data Collection |        10h       |     15h   | 14.12.2022 |
+|     Prototype    |        12h       |     8h    | 14.12.2022 |
+| Final Implementation |    18h       |     –     | 18.01.2023 |
+|      Report      |        10h       |     –     | 18.01.2023 |
+| Final Presentation |      4h        |     –     | 26.01.2023 |
 
 ## References
 
