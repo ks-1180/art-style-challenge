@@ -50,8 +50,8 @@ class Generator:
         result = self.generate_image(seed, self.G_ffhq, self.truncation_psi)
         for G_new, name in list(zip(self.G_styles, self.stlyes_names)):
             G_blend = copy.deepcopy(self.G_ffhq)
-            print(name)
-            mix = mixes.Mixes[name].value
+            print(name[0])
+            mix = mixes.Mixes[name[0]].value
             styles = [self.G_ffhq, G_new]
             self.__mix(G_blend, styles, mix)
             img = self.generate_image(seed, G_blend, psi=self.truncation_psi)
