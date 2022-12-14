@@ -115,8 +115,8 @@ We trained the following models:
 |:------------------:|:-----------:|:-------------:|:-----------------:|:------:|
 | Studio Ghibli male |   ffhq-256  | 23h 02m 32s   | 30 | 22.82 |
 |Studio Ghibli female|   ffhq-256  | 22h 39m 30s   | 30 | 19.52 |
-|    Fire Emblem male|   ffhq-256  | 23h 50m 31s   | 50 | 51.93 |
-| Fire Emblem female |   ffhq-256  | 21h 24m 19s   | 50 | 50.18 |
+|    Fire Emblem male|   ffhq-512  | 23h 50m 31s   | 50 | 51.93 |
+| Fire Emblem female |   ffhq-512  | 21h 24m 19s   | 50 | 50.18 |
 |   Digital Art male |   ffhq-256  | 11h 40m 20s   | 50 | 85.78 |
 | Digital Art female |   ffhq-256  | 11h 59m 11s   | 50 | 45.39 |
 
@@ -134,10 +134,31 @@ The prototype is placed in the demo folder and comes in the from of jupyter note
 To test the project and reproduce the findings, follow the installation guid below.
 
 ### Installation
+For the setup in Google Colab all imports and installation comands are already provided. <br>
+Additional requirements: <br>
+`extract_faces.ipynb` – to use `anime_extractor.py` the <a href="https://pypi.org/project/anime-face-detector/">anime-face-detector</a> is needed. Install:
+
+```
+pip install openmim
+mim install mmcv-full
+mim install mmdet
+mim install mmpose
+
+pip install anime-face-detector
+```
+`realistic_extractor.py` uses <a href="https://github.com/ageitgey/face_recognition">face_recognition</a>, for that install:
+
+```
+pip3 install face_recognition
+```
 
 ### Usage
 
 ### Intermediate Results
+<p align="center">
+  <img src="images/art_styles.png" alt="art_styles_example" width=80% height=80%>
+</p>
+note: unfortunatly, I trained the fire emblem models in different resolutions. Examples will follow later.
 
 
 ## Timeline
