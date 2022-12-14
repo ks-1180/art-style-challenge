@@ -136,9 +136,6 @@ class Evaluator:
 
         styles = [self.G_ffhq, self.G_best]
 
-        mix1 = [0, 0.2, 0.0, 0.2, 0.1, 0.2, 0.2]
-        mix2 = [1-m for m in mix1]
-
         mix_list = [mix1, mix2]
 
         self.__mix(G_blend, styles, mix_list)
