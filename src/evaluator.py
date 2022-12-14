@@ -6,7 +6,6 @@ import pandas as pd
 import numpy as np
 import cv2
 import copy
-import style_mixer as mixer
 
 def test_fid(csv_source, art_style):
     table = pd.read_csv(csv_source)
