@@ -169,7 +169,13 @@ note: unfortunatly, I trained the fire emblem models in different resolutions. E
 Visualization of training process (`evaluate_model.ipynb`)
 
 
+https://user-images.githubusercontent.com/61754345/207718872-67d86103-1bda-4b99-a683-373f4202621d.mov
 
+https://user-images.githubusercontent.com/61754345/207719510-9d9e1891-a844-4d31-af60-10ae2c6131eb.mov
+
+https://user-images.githubusercontent.com/61754345/207719348-068a212b-fb04-4852-ab52-9114219fdd7a.mov
+
+https://user-images.githubusercontent.com/61754345/207719392-e9860738-ab28-4cd1-82b5-a504b7325589.mov
 
 ## Timeline
 
@@ -177,7 +183,7 @@ Visualization of training process (`evaluate_model.ipynb`)
 |:----------------:|:----------------:|:---------:|:----------:|
 |   Project Set-Up |        4h        |     8h    | 14.12.2022 |
 |  Data Collection |        10h       |     15h   | 14.12.2022 |
-|     Prototype    |        12h       |     12h   | 14.12.2022 |
+|     Prototype    |        12h       |     15h   | 14.12.2022 |
 | Final Implementation |    18h       |     –     | 18.01.2023 |
 |      Report      |        10h       |     –     | 18.01.2023 |
 | Final Presentation |      4h        |     –     | 26.01.2023 |
