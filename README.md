@@ -154,17 +154,21 @@ pip3 install face_recognition
 Again, this is only needed for the face extraction tool to build your own dataset. 
 
 ### Usage
-- `generate_styles.ipynb`: presents and generate results of the trained StyleGANs models. To test, upload trained models on drive and adjust the path.
-- To use set Parameters as described and shown in the notebook and change paths accordingly. First upload a
-- `evaluate_model.ipynb`
-- `extract_faces.ipynb`
-
+- `generate_styles.ipynb`: presents and generate results of the trained StyleGANs models. To test, upload trained models and base model on drive and adjust the source paths. Set parameters as described in the notebook and generate images.
+- `evaluate_model.ipynb`: is used to evaluate the models performance and visualize the trainings prozess. Result are located in the images folder.
+- Again upload the models and adjust the paths.
+- `extract_faces.ipynb`: semi-automates the dataset building process. Faces can be cropped from videos or image folders using either a face detector for realistic styles or cartoony styles. 
 
 ### Intermediate Results
+Styles produced by `generate_styles.ipynb` (more to come):
 <p align="center">
   <img src="images/art_styles.png" alt="art_styles_example" width=80% height=80%>
 </p>
 note: unfortunatly, I trained the fire emblem models in different resolutions. Examples will follow later.
+
+Visualization of training process (`evaluate_model.ipynb`)
+
+
 
 
 ## Timeline
