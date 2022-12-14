@@ -113,16 +113,45 @@ Additionally, we train a conditional StyleGAN including all selected art styles.
 We trained the following models:
 |      Targer Data   |  Base Model | Training Time |   FID Estimation  |   FID  |
 |:------------------:|:-----------:|:-------------:|:-----------------:|:------:|
-| Studio Ghibli male |   ffhq-256  | 23h 02m 32s   | 30 | - |
+| Studio Ghibli male |   ffhq-256  | 23h 02m 32s   | 30 | 22.82 |
 |Studio Ghibli female|   ffhq-256  | 22h 39m 30s   | 30 | 19.52 |
 |    Fire Emblem male|   ffhq-256  | 23h 50m 31s   | 50 | 51.93 |
 | Fire Emblem female |   ffhq-256  | 21h 24m 19s   | 50 | 50.18 |
 |   Digital Art male |   ffhq-256  | 11h 40m 20s   | 50 | 85.78 |
 | Digital Art female |   ffhq-256  | 11h 59m 11s   | 50 | 45.39 |
 
+The FID estimation was based on the number of images we where able to collect for our database. 
+However, when comparing both of the Digital Art models, the female model reaches a significantly lower FID with approximatly the doubled amount of data.
+
 ### Build Application
 We build a small web application. 
 Depending on the remaining time, it will either show all the trained styles on randomly generated people or the user can upload an image of a face and the styles will be applied.
+
+## Prototype
+
+Due to lack of hardware, the whole project was setup and tested using Google Colab and Google Drive. 
+The prototype is placed in the demo folder and comes in the from of jupyter notebooks. 
+To test the project and reproduce the findings, follow the installation guid below.
+
+### Installation
+All notebooks need different requriments to run. For the setup in Google Colab all imports and installation comands are already provided. <br>
+`evaluate_model.ipynb`: <br>
+`extract_faces.ipynb`: This notebook provides three methods to extract faces to build your own dataset. 
+1. For realistic styles install 
+
+`train_stylegan2.ipynb`:
+This notebook follows the instructions to train a new StyleGan based on the offical <a href="https://github.com/NVlabs/stylegan2-ada-pytorch">StyleGAN2</a> repository. 
+The requirements are therefore taken directly from their repository:
+- Linux and Windows are supported, but we recommend Linux for performance and compatibility reasons.
+- 1–8 high-end NVIDIA GPUs with at least 12 GB of memory. We have done all testing and development using NVIDIA DGX-1 with 8 Tesla V100 GPUs.
+- 64-bit Python 3.7 and PyTorch 1.7.1. See https://pytorch.org/ for PyTorch install instructions.
+- CUDA toolkit 11.0 or later. Use at least version 11.1 if running on RTX 3090. (Why is a separate CUDA toolkit installation required? See comments in #2.)
+- Python libraries: pip install click requests tqdm pyspng ninja imageio-ffmpeg==0.4.3. We use the Anaconda3 2020.11 distribution which installs most of these by default.
+- Docker users: use the provided Dockerfile to build an image with the required library dependencies.
+
+Note: this could not be tested du to lack of hardware. When setting the repository up on your own device we recommend and GPU with at least 16GB RAM.
+
+### Usage
 
 ## Timeline
 
@@ -130,7 +159,7 @@ Depending on the remaining time, it will either show all the trained styles on r
 |:----------------:|:----------------:|:---------:|:----------:|
 |   Project Set-Up |        4h        |     8h    | 14.12.2022 |
 |  Data Collection |        10h       |     15h   | 14.12.2022 |
-|     Prototype    |        12h       |     8h    | 14.12.2022 |
+|     Prototype    |        12h       |     12h   | 14.12.2022 |
 | Final Implementation |    18h       |     –     | 18.01.2023 |
 |      Report      |        10h       |     –     | 18.01.2023 |
 | Final Presentation |      4h        |     –     | 26.01.2023 |
