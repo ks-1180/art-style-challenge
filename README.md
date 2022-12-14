@@ -131,7 +131,7 @@ Depending on the remaining time, it will either show all the trained styles on r
 
 Due to lack of hardware, the whole project was setup and tested using Google Colab and Google Drive. 
 The prototype is placed in the demo folder and comes in the from of jupyter notebooks. 
-To test the project and reproduce the findings, follow the installation guid below.
+To test the project and reproduce the findings, follow the installation and usage guids below.
 
 ### Installation
 For the setup in Google Colab all imports and installation comands are already provided. <br>
@@ -151,8 +151,14 @@ pip install anime-face-detector
 ```
 pip3 install face_recognition
 ```
+Again, this is only needed for the face extraction tool to build your own dataset. 
 
 ### Usage
+- `generate_styles.ipynb`: presents and generate results of the trained StyleGANs models. To test, upload trained models on drive and adjust the path.
+- To use set Parameters as described and shown in the notebook and change paths accordingly. First upload a
+- `evaluate_model.ipynb`
+- `extract_faces.ipynb`
+
 
 ### Intermediate Results
 <p align="center">
