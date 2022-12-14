@@ -12,20 +12,18 @@ def test_fid(csv_source, art_style):
     table['ticks'] = [tick*5 for tick in range(len(table))]
     table['name'] = art_style
     table.head()
-    table.loc[table.groupby('name')['fid'].idxmin()]
+    return table.loc[table.groupby('name')['fid'].idxmin()]
 
 class Evaluator:
-    def __init__(self, art_style, training_runs, idx_best_model):
+    def __init__(self, art_style, base_model_path, training_runs, idx_best_model):
         self.art_style = art_style
-        self.resolution = 256
-        self.base_model = f'ffhq{self.resolution}.pkl'
-
         self.best_FID = idx_best_model
+        self.resolution = 256
 
         self.snapshot_paths = [f'{training_runs}/{p}' for p in os.listdir(f'{training_runs}/') if 'snapshot' in p]
         self.snapshot_paths.sort()
 
-        self.G_ffhq = self.generate_network(f'/content/drive/MyDrive/data/nvidia-ada-models/{self.base_model}')
+        self.G_ffhq = self.generate_network(base_model_path)
         self.G_best = self.generate_network(self.snapshot_paths[self.best_FID])
 
         self.seeds = [torch.randn([1, self.G_ffhq.z_dim]).cuda() for i in range(6)]
@@ -41,6 +39,11 @@ class Evaluator:
         img = G.synthesis(w, noise_mode='const', force_fp32=True)
         img = (img.permute(0, 2, 3, 1) * 127.5 + 128).clamp(0, 255).to(torch.uint8)
         return img[0].cpu().numpy()
+
+    def generate_seed(self):
+        z = torch.randn([1, self.G_ffhq.z_dim]).cuda()
+        img = self.generate_image(z, self.G_ffhq, self.truncation_psi)
+        return img, z
 
     def __mix(self, base, styles, mix):
         resolutions =  [4*2**x for x in range(int(np.log2(self.resolution)-1))]
