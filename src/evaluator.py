@@ -29,6 +29,9 @@ class Evaluator:
         self.seeds = [torch.randn([1, self.G_ffhq.z_dim]).cuda() for i in range(6)]
         self.truncation_psi = 0.5
 
+    def __init__(self, art_style, ):
+        pass
+
     def generate_network(self, path):
         device = torch.device('cuda')
         f = dnnlib.util.open_url(path)
@@ -150,6 +153,7 @@ class Evaluator:
         img_stack = np.hstack((i for i in results))
 
         return img_stack
+  
 
     
 
