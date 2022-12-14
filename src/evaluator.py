@@ -66,7 +66,7 @@ class Evaluator:
 
         base_dict = base.state_dict()
         base_dict.update(dest_dict) 
-        self.base.load_state_dict(dest_dict)
+        base.load_state_dict(dest_dict)
 
     def compare_truncation(self, psi_1, psi_2):
         z = torch.randn([1, self.G_best.z_dim]).cuda()
@@ -87,7 +87,7 @@ class Evaluator:
             G_new = self.generate_network(p)
             img_row = []
             for seed in self.seeds:
-                img = self.generate_image(self.seeds, G_new, self.truncation_psi)
+                img = self.generate_image(seed, G_new, self.truncation_psi)
                 img_row.append(img)
             img_rows.append(np.hstack((i for i in img_row)))
 
