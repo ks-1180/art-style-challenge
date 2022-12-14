@@ -1,0 +1,6 @@
+torch==1.8.0+cu111
+torchvision==0.9.0+cu111
+requests==2.26.0
+opencv-python==4.5.4.60
+scipy==1.7.1
+dlib==19.22.1
