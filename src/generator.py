@@ -50,7 +50,7 @@ class Generator:
         result = self.generate_image(seed, self.G_ffhq, self.truncation_psi)
         for source in os.listdir(models_source):
             G_blend = copy.deepcopy(self.G_ffhq)
-            G_new = self.generate_network(source)
+            G_new = self.generate_network(f'{models_source}/{source}')
             name = os.path.splitext(os.path.basename(source))
 
             mix1  = mixes.Mixes[name[0]].value
