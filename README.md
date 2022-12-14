@@ -93,7 +93,7 @@ The following list highlights the main steps carried out for the data collection
 
 1. **Studio Ghilbli**: <br>
 Step 1: collect video data from all the movies (use own movie collection) <br>
-Step 2: Extract the faces using `video_extractor.py` (which uses the <a href="https://pypi.org/project/anime-face-detector/">anime-face-detector</a> [[6]](#6) to find the faces) <br>
+Step 2: Extract the faces using `anime_extractor.py` (which uses the <a href="https://pypi.org/project/anime-face-detector/">anime-face-detector</a> [[6]](#6) to find the faces) <br>
 Step 3: Manually clean up the dataset (remove non-humans and side profiles) <br>
 Step 4: divide the data into male and female characters <br>
 
@@ -134,24 +134,11 @@ The prototype is placed in the demo folder and comes in the from of jupyter note
 To test the project and reproduce the findings, follow the installation guid below.
 
 ### Installation
-All notebooks need different requriments to run. For the setup in Google Colab all imports and installation comands are already provided. <br>
-`evaluate_model.ipynb`: <br>
-`extract_faces.ipynb`: This notebook provides three methods to extract faces to build your own dataset. 
-1. For realistic styles install 
-
-`train_stylegan2.ipynb`:
-This notebook follows the instructions to train a new StyleGan based on the offical <a href="https://github.com/NVlabs/stylegan2-ada-pytorch">StyleGAN2</a> repository. 
-The requirements are therefore taken directly from their repository:
-- Linux and Windows are supported, but we recommend Linux for performance and compatibility reasons.
-- 1–8 high-end NVIDIA GPUs with at least 12 GB of memory. We have done all testing and development using NVIDIA DGX-1 with 8 Tesla V100 GPUs.
-- 64-bit Python 3.7 and PyTorch 1.7.1. See https://pytorch.org/ for PyTorch install instructions.
-- CUDA toolkit 11.0 or later. Use at least version 11.1 if running on RTX 3090. (Why is a separate CUDA toolkit installation required? See comments in #2.)
-- Python libraries: pip install click requests tqdm pyspng ninja imageio-ffmpeg==0.4.3. We use the Anaconda3 2020.11 distribution which installs most of these by default.
-- Docker users: use the provided Dockerfile to build an image with the required library dependencies.
-
-Note: this could not be tested du to lack of hardware. When setting the repository up on your own device we recommend and GPU with at least 16GB RAM.
 
 ### Usage
+
+### Intermediate Results
+
 
 ## Timeline
 
