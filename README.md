@@ -93,7 +93,7 @@ The following list highlights the main steps carried out for the data collection
 
 1. **Studio Ghilbli**: <br>
 Step 1: collect video data from all the movies (use own movie collection) <br>
-Step 2: Extract the faces using `video_extractor.py` (which uses the <a href="https://pypi.org/project/anime-face-detector/">anime-face-detector</a> [[6]](#6) to find the faces) <br>
+Step 2: Extract the faces using `anime_extractor.py` (which uses the <a href="https://pypi.org/project/anime-face-detector/">anime-face-detector</a> [[6]](#6) to find the faces) <br>
 Step 3: Manually clean up the dataset (remove non-humans and side profiles) <br>
 Step 4: divide the data into male and female characters <br>
 
@@ -113,16 +113,32 @@ Additionally, we train a conditional StyleGAN including all selected art styles.
 We trained the following models:
 |      Targer Data   |  Base Model | Training Time |   FID Estimation  |   FID  |
 |:------------------:|:-----------:|:-------------:|:-----------------:|:------:|
-| Studio Ghibli male |   ffhq-256  | 23h 02m 32s   | 30 | - |
+| Studio Ghibli male |   ffhq-256  | 23h 02m 32s   | 30 | 22.82 |
 |Studio Ghibli female|   ffhq-256  | 22h 39m 30s   | 30 | 19.52 |
 |    Fire Emblem male|   ffhq-256  | 23h 50m 31s   | 50 | 51.93 |
 | Fire Emblem female |   ffhq-256  | 21h 24m 19s   | 50 | 50.18 |
 |   Digital Art male |   ffhq-256  | 11h 40m 20s   | 50 | 85.78 |
 | Digital Art female |   ffhq-256  | 11h 59m 11s   | 50 | 45.39 |
 
+The FID estimation was based on the number of images we where able to collect for our database. 
+However, when comparing both of the Digital Art models, the female model reaches a significantly lower FID with approximatly the doubled amount of data.
+
 ### Build Application
 We build a small web application. 
 Depending on the remaining time, it will either show all the trained styles on randomly generated people or the user can upload an image of a face and the styles will be applied.
+
+## Prototype
+
+Due to lack of hardware, the whole project was setup and tested using Google Colab and Google Drive. 
+The prototype is placed in the demo folder and comes in the from of jupyter notebooks. 
+To test the project and reproduce the findings, follow the installation guid below.
+
+### Installation
+
+### Usage
+
+### Intermediate Results
+
 
 ## Timeline
 
@@ -130,7 +146,7 @@ Depending on the remaining time, it will either show all the trained styles on r
 |:----------------:|:----------------:|:---------:|:----------:|
 |   Project Set-Up |        4h        |     8h    | 14.12.2022 |
 |  Data Collection |        10h       |     15h   | 14.12.2022 |
-|     Prototype    |        12h       |     8h    | 14.12.2022 |
+|     Prototype    |        12h       |     12h   | 14.12.2022 |
 | Final Implementation |    18h       |     –     | 18.01.2023 |
 |      Report      |        10h       |     –     | 18.01.2023 |
 | Final Presentation |      4h        |     –     | 26.01.2023 |
