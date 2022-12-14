@@ -8,13 +8,16 @@ import cv2
 import copy
 import mixes
 class Generator:
-    def __init__(self, base_model, styles_dir):
-        self.res = 256
+    def __init__(self, base_model, styles_dir, resoltuion):
+        self.resolution = resoltuion
         self.truncation_psi = 0.5
 
         self.stlyes_paths = [f'{styles_dir}/{p}' for p in os.listdir(f'{styles_dir}/')]
         self.stlyes_paths.sort()
-        self.stlyes_names = [os.path.splitext(os.path.basename(source)) for source in self.stlyes_paths]
+        self.stlyes_names = []
+        for source in self.stlyes_paths:
+            name = os.path.splitext(os.path.basename(source))
+            self.stlyes_names.append(name)
 
         #self.evals = []
         #for source in self.stlyes_paths:
@@ -47,6 +50,7 @@ class Generator:
         result = self.generate_image(seed, self.G_ffhq, self.truncation_psi)
         for G_new, name in list(zip(self.G_styles, self.stlyes_names)):
             G_blend = copy.deepcopy(self.G_ffhq)
+            print(name)
             mix = mixes.Mixes[name].value
             styles = [self.G_ffhq, G_new]
             self.__mix(G_blend, styles, mix)
