@@ -12,12 +12,12 @@ class Generator:
         self.resolution = resoltuion
         self.truncation_psi = 0.5
 
-        self.stlyes_paths = [f'{styles_dir}/{p}' for p in os.listdir(f'{styles_dir}/')]
-        self.stlyes_paths.sort()
-        self.stlyes_names = []
-        for source in self.stlyes_paths:
-            name = os.path.splitext(os.path.basename(source))
-            self.stlyes_names.append(name)
+        #self.stlyes_paths = [f'{styles_dir}/{p}' for p in os.listdir(f'{styles_dir}/')]
+        #self.stlyes_paths.sort()
+        #self.stlyes_names = []
+        #for source in self.stlyes_paths:
+        #    name = os.path.splitext(os.path.basename(source))
+        #    self.stlyes_names.append(name)
 
         #self.evals = []
         #for source in self.stlyes_paths:
@@ -25,7 +25,7 @@ class Generator:
         #    e = evaluator.Evaluator(name, base_model, )
 
         self.G_ffhq = self.generate_network(base_model)
-        self.G_styles = [self.generate_network(network) for network in self.stlyes_paths]
+        #self.G_styles = [self.generate_network(network) for network in self.stlyes_paths]
         
     def generate_network(self, path):
         device = torch.device('cuda')
@@ -43,15 +43,21 @@ class Generator:
         img = self.generate_image(z, self.G_ffhq, self.truncation_psi)
         return img, z
 
-    def generate_art_styles(self, seed=None):
+    def generate_art_styles(self, models_source, seed=None):
         if seed == None:
             seed = self.generate_seed()
 
         result = self.generate_image(seed, self.G_ffhq, self.truncation_psi)
-        for G_new, name in list(zip(self.G_styles, self.stlyes_names)):
+        for source in os.listdir(models_source):
             G_blend = copy.deepcopy(self.G_ffhq)
-            print(name[0])
-            mix = mixes.Mixes[name[0]].value
+            G_new = self.generate_network(source)
+            name = os.path.splitext(os.path.basename(source))
+
+            mix1  = mixes.Mixes[name[0]].value
+            mix2 = [1-m for m in mix1]
+
+            mix = [mix1, mix2]
+
             styles = [self.G_ffhq, G_new]
             self.__mix(G_blend, styles, mix)
             img = self.generate_image(seed, G_blend, psi=self.truncation_psi)
