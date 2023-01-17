@@ -29,9 +29,6 @@ class Evaluator:
         self.seeds = [torch.randn([1, self.G_ffhq.z_dim]).cuda() for i in range(6)]
         self.truncation_psi = 0.5
 
-    def __init__(self, art_style, ):
-        pass
-
     def generate_network(self, path):
         device = torch.device('cuda')
         f = dnnlib.util.open_url(path)
@@ -40,6 +37,12 @@ class Evaluator:
     def generate_image(self, z, G, psi=float):
         w = G.mapping(z, None, truncation_psi = psi, truncation_cutoff=8)
         img = G.synthesis(w, noise_mode='const', force_fp32=True)
+        img = (img.permute(0, 2, 3, 1) * 127.5 + 128).clamp(0, 255).to(torch.uint8)
+        return img[0].cpu().numpy()
+
+    def generate_image_sep(self, z, G_m, G_s, psi=float):
+        w = G_m.mapping(z, None, truncation_psi = psi, truncation_cutoff=8)
+        img = G_s.synthesis(w, noise_mode='const', force_fp32=True)
         img = (img.permute(0, 2, 3, 1) * 127.5 + 128).clamp(0, 255).to(torch.uint8)
         return img[0].cpu().numpy()
 
@@ -134,7 +137,7 @@ class Evaluator:
             G = G_new
         writer.release()
 
-    def generate_mixed_styles(self, mix1, mix2):
+    def generate_mixed_styles(self, mix1, mix2, sep=False):
         G_blend = copy.deepcopy(self.G_ffhq)
 
         styles = [self.G_ffhq, self.G_best]
@@ -146,7 +149,11 @@ class Evaluator:
         results = []
         for seed in self.seeds:
             img1 = self.generate_image(seed, self.G_ffhq, psi=self.truncation_psi)
-            img2 = self.generate_image(seed, G_blend, psi=self.truncation_psi)
+            if sep:
+              img2 = self.generate_image_sep(seed, self.G_best, G_blend, psi=self.truncation_psi)
+            else:
+              img2 = self.generate_image(seed, G_blend, psi=0.5)
+
             img = np.vstack((img1, img2))
             results.append(img)
 
