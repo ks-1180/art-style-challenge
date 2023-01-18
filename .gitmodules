@@ -1,0 +1,6 @@
+[submodule "extern/stylegan2-ada-pytorch"]
+	path = extern/stylegan2-ada-pytorch
+	url = https://github.com/NVlabs/stylegan2-ada-pytorch.git
+[submodule "extern/stylegan3"]
+	path = extern/stylegan3
+	url = https://github.com/NVlabs/stylegan3.git
