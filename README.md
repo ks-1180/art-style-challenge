@@ -174,8 +174,9 @@ Again, this is only needed for the face extraction tool to build your own datase
 - `evaluate_model.ipynb`: is used to evaluate the models' performance and visualize the training process. The result are located in the images folder.
 - Again, upload the models and adjust the paths.
 - `extract_faces.ipynb`: semi-automates the dataset-building process. Faces can be cropped from videos or image folders using either a face detector for realistic styles or cartoony styles. 
+- `app.ipynb`: starts a webapplication to perform style transfer on custom faces or random faces (models are downloaded automatically)
 
-### Intermediate Results
+### Results
 Styles produced by `generate_styles.ipynb` (more to come):
 <p align="center">
   <img src="images/art_styles.png" alt="art_styles_example" width=80% height=80%>
@@ -200,9 +201,9 @@ https://user-images.githubusercontent.com/61754345/207719392-e9860738-ab28-4cd1-
 |   Project Set-Up |        4h        |     8h    | 14.12.2022 |
 |  Data Collection |        10h       |     15h   | 14.12.2022 |
 |     Prototype    |        12h       |     15h   | 14.12.2022 |
-| Final Implementation |    18h       |     –     | 18.01.2023 |
-|      Report      |        10h       |     –     | 18.01.2023 |
-| Final Presentation |      4h        |     –     | 26.01.2023 |
+| Final Implementation |    18h       |     10h     | 18.01.2023 |
+|      Report      |        10h       |     6h     | 18.01.2023 |
+| Final Presentation |      4h        |     4h     | 26.01.2023 |
 
 ## References
 

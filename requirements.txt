@@ -4,3 +4,5 @@ requests==2.26.0
 opencv-python==4.5.4.60
 scipy==1.7.1
 dlib==19.22.1
+gradio==3.16.2
+requests==2.26.0
