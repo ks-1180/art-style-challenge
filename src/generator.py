@@ -36,6 +36,13 @@ class Generator:
         return img[0].cpu().numpy()
 
     def generate_image_w(self, w, G):
+        #w = torch.from_numpy(w).to(self.device)
+        img = G.synthesis(w, noise_mode='const', force_fp32=True)
+        img = (img.permute(0, 2, 3, 1) * 127.5 + 128).clamp(0, 255).to(torch.uint8)
+        return img[0].cpu().numpy()
+
+
+    def generate_latent(self, w, G):
         w = torch.from_numpy(w).to(self.device)
         img = G.synthesis(w, noise_mode='const', force_fp32=True)
         img = (img.permute(0, 2, 3, 1) * 127.5 + 128).clamp(0, 255).to(torch.uint8)
@@ -48,17 +55,50 @@ class Generator:
         return img, z
 
 
-    def add_border(self, img):
-      return cv2.copyMakeBorder(img, 10, 10, 10, 10, cv2.BORDER_CONSTANT, None, value = [255, 255, 255])
+    def add_border(self, img, top=10, bottom=10, left=10, right=10):
+      return cv2.copyMakeBorder(img, top, bottom, left, right, cv2.BORDER_CONSTANT, None, value = [255, 255, 255])
+
+    def make_final_stack(self, original, result):
+      h_stack = original
+      stack = []
+      count = 1
+      count_final = 0
+
+      for r in result:  
+        if count == 3:
+          stack.append(h_stack)
+          h_stack = r
+          count = 1
+        else:
+          h_stack = np.hstack((h_stack, r))
+          count += 1
+
+        count_final += 1
+
+        #resize final stack:
+        if count_final == len(result) and h_stack.shape[1] != 828:
+          border = (828-h_stack.shape[1]) / 2
+          border = int(border)
+          h_stack = self.add_border(h_stack, 0, 0, border, border)
+          stack.append(h_stack)
+        elif count_final == len(result):
+          stack.append(h_stack)
+
+      if count_final == 0:
+        stack.append(original)
+
+      return np.vstack(stack)
 
 
-    def generate_art_styles(self, seed=None):
+    def generate_art_styles(self, seed=None, styles=None):
         if seed == None:
             seed = self.generate_seed()
 
-        #result = self.generate_image(seed, self.G_ffhq, self.truncation_psi)
         result = []
-        for source in os.listdir(self.styles_dir):
+        original = self.generate_image(seed, self.G_ffhq, self.truncation_psi)
+        original = self.add_border(original)
+        styles = os.listdir(self.styles_dir) if styles==None else styles
+        for source in styles:
             G_blend = copy.deepcopy(self.G_ffhq)
             G_new = self.generate_network(f'{self.styles_dir}/{source}')
             name = os.path.splitext(os.path.basename(source))
@@ -74,16 +114,19 @@ class Generator:
             img = self.add_border(img)
             #result = np.hstack((result, img))
             result.append(img)
-        return np.hstack(result)
 
-    def generate_art_styles_w(self, models_source, latent_w, psi=0.5):
+        return self.make_final_stack(original, result)
+
+    def generate_art_styles_w(self, latent_w, styles=None):
         w = torch.from_numpy(latent_w).to(torch.device('cuda'))
-        result = self.generate_image_w(w, self.G_ffhq)
-        img_arr = []
-        img_arr.append(result)
-        for source in os.listdir(models_source):
+
+        result = []
+        original = self.generate_image_w(w, self.G_ffhq)
+        original = self.add_border(original)
+        styles = os.listdir(self.styles_dir) if styles==None else styles
+        for source in styles:
             G_blend = copy.deepcopy(self.G_ffhq)
-            G_new = self.generate_network(f'{models_source}/{source}')
+            G_new = self.generate_network(f'{self.styles_dir}/{source}')
             name = os.path.splitext(os.path.basename(source))
 
             mix1  = mixes.Mixes[name[0]].value
@@ -97,11 +140,12 @@ class Generator:
             #add truncation
             w_avg = G_blend.mapping.w_avg
             w = torch.from_numpy(latent_w).to(torch.device('cuda'))
-            w_blend = w_avg + psi*(w - w_avg)
+            w_blend = w_avg + self.truncation_psi*(w - w_avg)
             img = self.generate_image_w(w_blend, G_blend)
-            img_arr.append(img)
-            result = np.hstack((result, img))
-        return result, img_arr
+            img = self.add_border(img)
+            #img_arr.append(img)
+            result.append(img)
+        return self.make_final_stack(original, result)
     
 
     def __mix(self, base, styles, mix):
